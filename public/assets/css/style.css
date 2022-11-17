@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+body {
+    background-color: #83B099;
+    font-family: 'Ubuntu', sans-serif;
+}
+.nav, .footer, .modal-header {
+    background-color: #1A997C;
+    color: white;
+}
+.titleSite {
+    color: white;
+    font-family: 'Dancing Script', cursive;
+}
+.partSite {
+    color: white;
+}
+.addSuccess {
+    background-color: rgba(26, 153, 124, 0.5);
+    border-radius: 0.3rem;
+}
+.addError {
+    background-color: rgba(216, 29, 32, 0.5);
+    border-radius: 0.3rem;
+}
+.pageTitle {
+    background-color: white;
+    color: #1A997C;
+    font-weight: bold;
+    text-decoration-line: none;
+    border-radius: 0.3rem;
+}
+.textFooter {
+    color: white;
+}
+.saveBtn, .addBtn, .changeBtn, .btn-success, .modalBtn, .newPatientBtn, .page-item.active .page-link {
+    background-color: #1A997C;
+    color: white;
+    border-color: #1A997C;
+}
+.btn-success:hover {
+    background-color: #1A997C;
+    color: #212529;
+    border-color: #1A997C;
+}
+.error{
+    color: red;
+}
+.changeColorProfile {
+    font-weight: bold;
+    text-decoration: underline #1A997C;
+}
+
+/*-----Tableau-----*/
+.table {
+    text-align: center;
+}
+.table .table-dark {
+    border-color: white;
+}
+.table tbody {
+    border-top: white!important;
+}
+.table .table-dark th {
+    background-color: #1A997C;
+    vertical-align: middle;
+}
+@media (min-width: 992px) {
+    .table {
+        table-layout: fixed;
+    }
+}
+.card-title {
+    color: #1A997C;
+    font-weight: bold;
+    text-decoration-line: none;
+}
+.page-link {
+    color: #212529;
+}
+.changeColorLink {
+    color: #212529;
+    text-decoration: none;
+}
+/*-----Tableau-----*/
