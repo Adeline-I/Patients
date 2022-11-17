@@ -1,8 +1,9 @@
 <?php
-require_once(dirname(__FILE__).'/../config/init.php');
-require_once(dirname(__FILE__).'/../utils/database.php');
-require_once(dirname(__FILE__).'/../models/Appointment.php');
-require_once(dirname(__FILE__).'/../models/Patient.php');
+require_once(dirname(__FILE__) . '/../config/init.php');
+require_once(dirname(__FILE__) . '/../config/const.php');
+require_once(dirname(__FILE__) . '/../utils/database.php');
+require_once(dirname(__FILE__) . '/../models/Appointment.php');
+require_once(dirname(__FILE__) . '/../models/Patient.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -65,12 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($birthdate)) {
         $birthdateObj = DateTime::createFromFormat('Y-m-d', $birthdate);
         $currentDateObj = new DateTime();
-        if($birthdateObj === false){
+        if ($birthdateObj === false) {
             $error["birthdate"] = "La date entrée n'est pas valide.";
         } else {
             $diff = $birthdateObj->diff($currentDateObj);
-            $age = $diff->days/365;
-            if (!$birthdateObj || $diff->invert == 1 || $birthdateObj->format('Y-m-d') !== $birthdate || $age==0 || $age>120) {
+            $age = $diff->days / 365;
+            if (!$birthdateObj || $diff->invert == 1 || $birthdateObj->format('Y-m-d') !== $birthdate || $age == 0 || $age > 120) {
                 $error["birthdate"] = "La date entrée n'est pas valide.";
             }
         }
@@ -83,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($phone)) {
         $testPhone = filter_var($phone, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_PHONENUMBER . '/')));
-    
+
         if ($testPhone === false) {
             $error["phone"] = "Vous devez entrer un numéro de téléphone valide.";
         }
@@ -91,10 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //===================== date : Nettoyage et validation =======================
     $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_SPECIAL_CHARS));
-    
+
     if (!empty($date)) {
         $dateObj = DateTime::createFromFormat('Y-m-d', $date);
-        if($dateObj === false){
+        if ($dateObj === false) {
             $error["date"] = "La date entrée n'est pas valide.";
         } else {
             if (!$dateObj  || $dateObj->format('Y-m-d') !== $date) {
@@ -109,10 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //===================== time : Nettoyage et validation =======================
     $time = trim(filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS));
-    
+
     if (!empty($time)) {
         $timeObj = DateTime::createFromFormat('H:i', $time);
-        if($timeObj === false){
+        if ($timeObj === false) {
             $error["time"] = "L'heure entrée n'est pas valide.";
         } else {
             if (!$timeObj || $timeObj->format('H:i') !== $time) {
@@ -125,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error["time"] = "Vous devez entrer une heure de rendez-vous.";
     }
 
-    $dateHour = $newDate.' '.$newHour;
+    $dateHour = $newDate . ' ' . $newHour;
     if (Appointment::isExist($dateHour)) {
         $error["dateHour"] = "Ce rendez-vous est déjà pris.";
     }
@@ -145,9 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $pdo->rollback();
             }
-            
         } catch (PDOException $execption) {
-            
+
             $addError = "Les données n'ont pas été envoyé.";
             exit();
         }
@@ -167,12 +167,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $addSuccess = "Les données ont été envoyé avec succès.";
         }
     }
-
-
 }
 
-include(dirname(__FILE__).'/../views/templates/header.php');
+include(dirname(__FILE__) . '/../views/templates/header.php');
 
-include(dirname(__FILE__).'/../views/add-patient-appointment.php');
+include(dirname(__FILE__) . '/../views/add-patient-appointment.php');
 
-include(dirname(__FILE__).'/../views/templates/footer.php');
+include(dirname(__FILE__) . '/../views/templates/footer.php');
